@@ -29,7 +29,7 @@
                     <a class="text-muted" href="#">Subscribe</a>
                 </div>
                 <div class="col-4 text-center">
-                    <a class="blog-header-logo text-dark" href="#">Large</a>
+                    <a class="blog-header-logo text-dark" href="#">Boolpress</a>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
                     <a class="text-muted" href="#" aria-label="Search">
@@ -41,7 +41,8 @@
                             <path d="M21 21l-5.2-5.2"></path>
                         </svg>
                     </a>
-                    <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="{{ route("login") }}">Sign in</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="{{ route("register") }}">Sign up</a>
                 </div>
             </div>
         </header>

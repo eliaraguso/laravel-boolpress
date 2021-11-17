@@ -19,6 +19,10 @@ class PostController extends Controller
         //SELECT * FROM posts WHERE slug = $slug LIMIT;
         $post = Post::where('slug', $slug)->first();
 
+        if(!$post) {
+            abort("404");
+        }
+
         return view("guest.posts.show", compact("post"));
     }
 }

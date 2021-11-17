@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
+// use Illuminate\Support\Facades\Redirect;
 
 class PostController extends Controller
 {
@@ -38,7 +39,30 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validazione
+        $request->validate([
+            "title" => "string|required|max:100",
+            "content" => "string|required"
+        ]);
+
+        $newPost = new Post();
+        $newPost->fill($request->all());
+        $slug = Str::of($request->title)->slug('-');
+        $postExist = Post::where("slug", $slug)->first();
+
+        $count = 2;
+        while ($postExist) {
+            $slug = Str::of($request->title)->slug('-') . "-{$count}";
+            $postExist = Post::where("slug", $slug)->first();
+            $count++;
+        }
+
+
+
+        $newPost->slug = $slug;
+        $newPost->save();
+
+        return redirect()->route("admin.posts.index")->with("success", "Il post è stato creato");
     }
 
     /**
